@@ -80,6 +80,48 @@ public class TokenizerTest {
     public static void testPrivate() throws TokenizerException {
       testTokenizes("private", new PrivateToken());
   }
+  public static void testAddition() throws TokenizerException {
+    testTokenizes("+", new AdditionToken());
+}
+public static void testSubtraction() throws TokenizerException {
+  testTokenizes("-", new SubtractionToken());
+}
+public static void testMultiplication() throws TokenizerException {
+  testTokenizes("*", new MultiplicationToken());
+}
+public static void testDivision() throws TokenizerException {
+  testTokenizes("/", new DivisionToken());
+}
+public static void testEqualTo() throws TokenizerException {
+  testTokenizes("==", new EqualToToken());
+}
+public static void testNotEqualTo() throws TokenizerException {
+  testTokenizes("!=", new NotEqualToToken());
+}
+public static void testGreaterThan() throws TokenizerException {
+  testTokenizes(">", new GreaterThanToken());
+}
+public static void testGreaterThanEqualTo() throws TokenizerException {
+  testTokenizes(">=", new GreaterThanEqualToToken());
+}
+public static void testLessThan() throws TokenizerException {
+  testTokenizes("<", new LessThanToken());
+}
+public static void testLessThanEqualTo() throws TokenizerException {
+  testTokenizes("<=", new LessThanEqualToToken());
+}
+public static void testAND() throws TokenizerException {
+  testTokenizes("&&", new LogicalANDToken());
+}
+public static void testOR() throws TokenizerException {
+  testTokenizes("||", new LogicalORToken());
+}
+public static void testNOT() throws TokenizerException {
+  testTokenizes("!", new LogicalNOTToken());
+}
+public static void testEQUAL() throws TokenizerException {
+  testTokenizes("=", new EqualToken());
+}
     public static void testTwoReservedWords() throws TokenizerException {
         testTokenizes("if else",
                       new IfToken(),
@@ -107,6 +149,20 @@ public class TokenizerTest {
         testPrivate();
         testProtected();
         testTwoReservedWords();
+        testAddition();
+        testSubtraction();
+        testMultiplication();
+        testDivision();
+        testEqualTo();
+        //testNotEqualTo();
+        testGreaterThan();
+        //testGreaterThanEqualTo();
+        testLessThan();
+        //testLessThanEqualTo();
+        testAND();
+        testOR();
+        testNOT();
+        testEQUAL();
     }
 }
 

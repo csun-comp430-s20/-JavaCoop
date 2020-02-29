@@ -71,7 +71,7 @@ public class Tokenizer {
 	private IntegerToken tryTokenizeInteger() {
 		String digits = "";
 
-		if (inputPos < input.length && input[inputPos] == '-') {
+		if (inputPos < input.length && input[inputPos] == '0') {
 			digits += input[inputPos];
 			inputPos++;
 		}
@@ -124,6 +124,54 @@ public class Tokenizer {
 					} else if (input[inputPos] == ')') {
 						inputPos++;
 						return new RightParenToken();
+					} else if (input[inputPos] == '+') {
+						inputPos++;
+						return new AdditionToken();
+					} else if (input[inputPos] =='-') {
+						inputPos++;
+						return new SubtractionToken();
+					} else if (input[inputPos] =='*') {
+						inputPos++;
+						return new MultiplicationToken();
+					} else if (input[inputPos] =='/') {
+						inputPos++;
+						return new DivisionToken();
+					} else if (input[inputPos] == '>') {
+						inputPos++;
+						return new GreaterThanToken();
+					} else if (input[inputPos] == '<') {
+						inputPos++;
+						return new LessThanToken();
+					} else if (input[inputPos] == '!') {
+						inputPos++;
+						return new LogicalNOTToken();
+					} else if (input[inputPos] == '=') {
+						inputPos++;
+						return new EqualToken();
+					} else if (input[inputPos] == '=' && input[inputPos+1]== '=') {
+						inputPos++;
+						inputPos++;
+						return new EqualToToken();
+					} else if (input[inputPos] == '!' && input[inputPos+1]== '=') {
+						inputPos++;
+						inputPos++;
+						return new NotEqualToToken();
+					} else if (input[inputPos] == '>' && input[inputPos+1]== '=') {
+						inputPos++;
+						inputPos++;
+						return new GreaterThanEqualToToken();
+					} else if (input[inputPos] == '<' && input[inputPos+1]== '=') {
+						inputPos++;
+						inputPos++;
+						return new LessThanEqualToToken();
+					} else if (input[inputPos] == '&' && input[inputPos+1]== '&') {
+						inputPos++;
+						inputPos++;
+						return new LogicalANDToken();
+					} else if (input[inputPos] == '|' && input[inputPos+1]== '|') {
+						inputPos++;
+						inputPos++;
+						return new LogicalORToken();
 					} else {
 						throw new TokenizerException("Have input, but it's not valid");
 					}

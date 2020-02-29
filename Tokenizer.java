@@ -124,10 +124,10 @@ public class Tokenizer {
 					} else if (input[inputPos] == ')') {
 						inputPos++;
 						return new RightParenToken();
-					} else if (input[inputPos] == '+') {
+					} else if (input[inputPos] == '+' && inputPos == input.length-1) {
 						inputPos++;
 						return new AdditionToken();
-					} else if (input[inputPos] =='-') {
+					} else if (input[inputPos] =='-' && inputPos == input.length-1) {
 						inputPos++;
 						return new SubtractionToken();
 					} else if (input[inputPos] =='*') {

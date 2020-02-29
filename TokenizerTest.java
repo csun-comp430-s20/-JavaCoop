@@ -122,6 +122,13 @@ public static void testNOT() throws TokenizerException {
 public static void testEQUAL() throws TokenizerException {
   testTokenizes("=", new EqualToken());
 }
+
+public static void testIncrement() throws TokenizerException {
+  testTokenizes("++", new IncrementToken());
+}
+public static void testDecrement() throws TokenizerException {
+  testTokenizes("--", new DecrementToken());
+}
     public static void testTwoReservedWords() throws TokenizerException {
         testTokenizes("if else",
                       new IfToken(),
@@ -163,6 +170,8 @@ public static void testEQUAL() throws TokenizerException {
         testOR();
         testNOT();
         testEQUAL();
+        testIncrement();
+        testDecrement();
     }
 }
 

@@ -172,7 +172,19 @@ public class Tokenizer {
 						inputPos++;
 						inputPos++;
 						return new LogicalORToken();
-					} else {
+					} 
+               else if (input[inputPos] == '+' && input[inputPos+1]== '+') {
+						inputPos++;
+						inputPos++;
+						return new IncrementToken();
+					} 
+               else if (input[inputPos] == '-' && input[inputPos+1]== '-') {
+						inputPos++;
+						inputPos++;
+						return new DecrementToken();
+					} 
+               
+               else {
 						throw new TokenizerException("Have input, but it's not valid");
 					}
 				} else {

@@ -145,7 +145,7 @@ public class Tokenizer {
 					} else if (input[inputPos] == '!') {
 						inputPos++;
 						return new LogicalNOTToken();
-					} else if (input[inputPos] == '=') {
+					} else if (input[inputPos] == '=' && inputPos == input.length-1 ) {
 						inputPos++;
 						return new EqualToken();
 					} else if (input[inputPos] == '=' && input[inputPos+1]== '=') {

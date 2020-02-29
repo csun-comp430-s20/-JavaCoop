@@ -154,11 +154,11 @@ public static void testEQUAL() throws TokenizerException {
         testMultiplication();
         testDivision();
         testEqualTo();
-        //testNotEqualTo();
+        testNotEqualTo();
         testGreaterThan();
-        //testGreaterThanEqualTo();
+        testGreaterThanEqualTo();
         testLessThan();
-        //testLessThanEqualTo();
+        testLessThanEqualTo();
         testAND();
         testOR();
         testNOT();

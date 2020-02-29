@@ -136,13 +136,13 @@ public class Tokenizer {
 					} else if (input[inputPos] =='/') {
 						inputPos++;
 						return new DivisionToken();
-					} else if (input[inputPos] == '>') {
+					} else if (input[inputPos] == '>' && inputPos == input.length-1) {
 						inputPos++;
 						return new GreaterThanToken();
-					} else if (input[inputPos] == '<') {
+					} else if (input[inputPos] == '<' && inputPos == input.length-1) {
 						inputPos++;
 						return new LessThanToken();
-					} else if (input[inputPos] == '!') {
+					} else if (input[inputPos] == '!' && inputPos == input.length-1) {
 						inputPos++;
 						return new LogicalNOTToken();
 					} else if (input[inputPos] == '=' && inputPos == input.length-1 ) {

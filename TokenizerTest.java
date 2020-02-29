@@ -42,7 +42,7 @@ public class TokenizerTest {
     }
     
     public static void testPrint() throws TokenizerException {
-      testTokenizes("Print", new PrintToken());
+      testTokenizes("print", new PrintToken());
   }
     public static void testString() throws TokenizerException {
       testTokenizes("String", new StringToken());
@@ -80,9 +80,6 @@ public class TokenizerTest {
     public static void testPrivate() throws TokenizerException {
       testTokenizes("private", new PrivateToken());
   }
-    public static void testChar() throws TokenizerException {
-      testTokenizes("a", new CharToken());
-  }
     public static void testTwoReservedWords() throws TokenizerException {
         testTokenizes("if else",
                       new IfToken(),
@@ -109,7 +106,6 @@ public class TokenizerTest {
         testPublic();
         testPrivate();
         testProtected();
-        testChar();
         testTwoReservedWords();
     }
 }

@@ -67,7 +67,7 @@ public class ParserTest {
     public static void main(String[] args) throws ParseException {
     	//emptyDoesNotParse(); //causes crashing because null will not work so it works
     	integerParses();
-    	//ifParses();
+    	ifParses();
     }
 } // ParserTest
     

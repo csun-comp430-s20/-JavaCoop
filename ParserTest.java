@@ -6,7 +6,6 @@ public class ParserTest {
         assert(expected.equals((new Parser(tokens)).parseToplevelExp()));
         Exp result = new Parser(tokens).parseToplevelExp();
         boolean test =  (expected.equals(result));
-        test = (new IntegerExp(123).value == (new IntegerExp(123).value));
     } // assertParses
 
 
@@ -67,8 +66,8 @@ public class ParserTest {
     }
     public static void main(String[] args) throws ParseException {
     	//emptyDoesNotParse(); //causes crashing because null will not work so it works
-    	//integerParses();
-    	ifParses();
+    	integerParses();
+    	//ifParses();
     }
 } // ParserTest
     

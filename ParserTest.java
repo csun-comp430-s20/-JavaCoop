@@ -6,6 +6,7 @@ public class ParserTest {
         assert(expected.equals((new Parser(tokens)).parseToplevelExp()));
         Exp result = new Parser(tokens).parseToplevelExp();
         boolean test =  (expected.equals(result));
+        System.out.println(test);
     } // assertParses
 
 
@@ -68,6 +69,10 @@ public class ParserTest {
     	//emptyDoesNotParse(); //causes crashing because null will not work so it works
     	integerParses();
     	ifParses();
+    	variableParses();
+    	plusIsLeftAssociative();
+    	plusParses();
+    	parensParse();
     }
 } // ParserTest
     

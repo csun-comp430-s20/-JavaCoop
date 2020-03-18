@@ -83,9 +83,6 @@ public class Parser {
             final ParseResult<Exp> ifFalse = parseExp(ifTrue.nextPos + 1);
             return new ParseResult<Exp>(new IfExp(guard.result, ifTrue.result, ifFalse.result),
                                         ifFalse.nextPos);
-        } else if(tokens[startPos] instanceof IntegerToken){
-        	IntegerToken inttoken = (IntegerToken) tokens[startPos];
-            return new ParseResult<Exp>(new IntegerExp(inttoken.value), startPos + 1);
         } else {
         	return parseAdditiveExp(startPos);
         }

@@ -36,7 +36,14 @@ public class Parser {
                 curPos = curPrimary.nextPos;
                 resultList.add(curPrimary.result);
             } catch (final ParseException e) {
-                break;
+                try {
+                	checkTokenIs(curPos, new SubtractionToken());
+                  final ParseResult<Exp> curPrimary = parsePrimary(curPos + 1);
+                  curPos = curPrimary.nextPos;
+                  resultList.add(curPrimary.result);
+                } catch (final ParseException e2) {
+                	break;
+                }
             }
         }
 

@@ -59,6 +59,13 @@ public class ParserTest {
                      new AdditionToken(),
                      new IntegerToken(3));
     }
+    
+    public static void subParses() throws ParseException {
+      assertParses(new PlusExp(new IntegerExp(1), new IntegerExp(2)),
+                   new IntegerToken(1),
+                   new SubtractionToken(),
+                   new IntegerToken(2));
+  }
 
     public static void missingIntegerGivesParseError() throws ParseException {
         assertParses(null,
@@ -73,6 +80,7 @@ public class ParserTest {
     	plusIsLeftAssociative();
     	plusParses();
     	parensParse();
+    	subParses();
     }
 } // ParserTest
     

@@ -50,3 +50,5 @@
 /Program.class
 /SubtractionToken.class
 /VariableExp.class
+/WhileExp.class
+/BooleanExp.class

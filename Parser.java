@@ -41,8 +41,15 @@ public class Parser {
                   final ParseResult<Exp> curPrimary = parsePrimary(curPos + 1);
                   curPos = curPrimary.nextPos;
                   resultList.add(curPrimary.result);
-                } catch (final ParseException e2) {
-                	break;
+                } catch (final ParseException e1) {
+                	try {
+                  	checkTokenIs(curPos, new MultiplicationToken());
+                    final ParseResult<Exp> curPrimary = parsePrimary(curPos + 1);
+                    curPos = curPrimary.nextPos;
+                    resultList.add(curPrimary.result);
+                  } catch (final ParseException e2) {
+                  	break;
+                  }
                 }
             }
         }
@@ -71,7 +78,11 @@ public class Parser {
             final IntegerToken asInt = (IntegerToken)tokens[startPos];
             return new ParseResult<Exp>(new IntegerExp(asInt.value),
                                         startPos + 1);
-        } else {
+        } else if (tokens[startPos] instanceof BooleanToken) {
+          final BooleanToken asInt = (BooleanToken)tokens[startPos];
+          return new ParseResult<Exp>(new BooleanExp(asInt.value),
+                                      startPos + 1);
+        }else {
             checkTokenIs(startPos, new LeftParenToken());
             final ParseResult<Exp> inner = parseExp(startPos + 1);
             checkTokenIs(inner.nextPos, new RightParenToken());
@@ -90,7 +101,14 @@ public class Parser {
             final ParseResult<Exp> ifFalse = parseExp(ifTrue.nextPos + 1);
             return new ParseResult<Exp>(new IfExp(guard.result, ifTrue.result, ifFalse.result),
                                         ifFalse.nextPos);
-        } else {
+        } else if(tokens[startPos] instanceof WhileToken) {
+        	checkTokenIs(startPos + 1, new LeftParenToken());
+          final ParseResult<Exp> guard = parseExp(startPos + 2);
+          checkTokenIs(guard.nextPos, new RightParenToken());
+          final ParseResult<Exp> ifTrue = parseExp(guard.nextPos + 1);
+          return new ParseResult<Exp>(new WhileExp(guard.result, ifTrue.result),
+                                      ifTrue.nextPos);
+    }else {
         	return parseAdditiveExp(startPos);
         }
     }

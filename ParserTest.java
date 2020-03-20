@@ -76,18 +76,28 @@ public class ParserTest {
                    new MultiplicationToken(),
                    new IntegerToken(2));
   }
+    public static void divParses() throws ParseException {
+      assertParses(new PlusExp(new IntegerExp(1), new IntegerExp(2)),
+                   new IntegerToken(1),
+                   new DivisionToken(),
+                   new IntegerToken(2));
+  }
 
     public static void missingIntegerGivesParseError() throws ParseException {
         assertParses(null,
                      new IntegerToken(1),
                      new AdditionToken());
     }
-    
+    public static void returnParse() throws ParseException {
+      assertParses(new VariableExp("foo"),
+                   new ReturnToken(),
+                   new VariableToken("foo"));
+  }
     public static void whileParses() throws ParseException {
       assertParses(new WhileExp(new BooleanExp(true), new PlusExp(new IntegerExp(2), new IntegerExp(3))),
                    new WhileToken(),
                    new LeftParenToken(),
-                   new IntegerToken(1),
+                   new BooleanToken(true),
                    new RightParenToken(),
                    new IntegerToken(2),
                    new AdditionToken(),
@@ -114,7 +124,11 @@ public class ParserTest {
     	System.out.println(" "+i++);
     	boolParses();
     	System.out.println(" "+i++);
-    	boolParses();
+    	divParses();
+    	System.out.println(" "+i++);
+    	whileParses();
+    	System.out.println(" "+i++);
+    	returnParse();
     	System.out.println(" "+i++);
     }
 } // ParserTest

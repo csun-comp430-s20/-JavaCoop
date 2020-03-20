@@ -41,7 +41,7 @@ public class Tokenizer {
 			} else if (letters.equals("Class")) {
 				return new ClassToken();
 			} else if (letters.equals("boolean")) {
-				return new BooleanToken();
+				return new BooleanToken(false);
 			} else if (letters.equals("this")) {
 				return new ThisToken();
 			} else if (letters.equals("for")) {

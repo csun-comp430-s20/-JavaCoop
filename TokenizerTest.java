@@ -54,7 +54,7 @@ public class TokenizerTest {
       testTokenizes("Class", new ClassToken());
   }
     public static void testBoolean() throws TokenizerException {
-      testTokenizes("boolean", new BooleanToken());
+      testTokenizes("boolean", new BooleanToken(false));
   }
     public static void testThis() throws TokenizerException {
       testTokenizes("this", new ThisToken());

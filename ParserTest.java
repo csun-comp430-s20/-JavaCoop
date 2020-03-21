@@ -65,22 +65,27 @@ public class ParserTest {
     }
     
     public static void subParses() throws ParseException {
-      assertParses(new PlusExp(new IntegerExp(1), new IntegerExp(2)),
+      assertParses(new SubExp(new IntegerExp(1), new IntegerExp(2)),
                    new IntegerToken(1),
                    new SubtractionToken(),
                    new IntegerToken(2));
   }
     public static void multParses() throws ParseException {
-      assertParses(new PlusExp(new IntegerExp(1), new IntegerExp(2)),
+      assertParses(new MultExp(new IntegerExp(1), new IntegerExp(2)),
                    new IntegerToken(1),
                    new MultiplicationToken(),
                    new IntegerToken(2));
   }
     public static void divParses() throws ParseException {
-      assertParses(new PlusExp(new IntegerExp(1), new IntegerExp(2)),
+      assertParses(new DivExp(new IntegerExp(1), new IntegerExp(2)),
                    new IntegerToken(1),
                    new DivisionToken(),
                    new IntegerToken(2));
+  }
+    public static void increParses() throws ParseException {
+      assertParses(new IntegerExp(2),
+      						 new IncrementToken(),
+                   new IntegerToken(1));
   }
 
     public static void missingIntegerGivesParseError() throws ParseException {
@@ -103,6 +108,29 @@ public class ParserTest {
                    new AdditionToken(),
                    new IntegerToken(3));
   }
+    
+    public static void ExtendsParses() throws ParseException {
+      assertParses(new ExtendExp(new VariableExp("class1"), new VariableExp("class2")),
+                   new ClassToken(),
+                   new VariableToken("class1"),
+                   new ExtendsToken(),
+                   new ClassToken(),
+                   new VariableToken("class2"));
+  }
+    public static void ForParses() throws ParseException {
+      assertParses(new ForExp(new IntegerExp(2), new BooleanExp(true), new IntegerExp(2), new PlusExp(new IntegerExp(2), new IntegerExp(3))),
+                   new ForToken(),
+                   new LeftParenToken(),
+                   new IntegerToken(2),
+                   new BooleanToken(true),
+                   new IncrementToken(),
+                   new IntegerToken(1),
+                   new RightParenToken(),
+                   new IntegerToken(2),
+                   new AdditionToken(),
+                   new IntegerToken(3));
+  }
+
     public static void main(String[] args) throws ParseException {
     	//emptyDoesNotParse(); //causes crashing because null will not work so it works
     	int i = 0;
@@ -129,6 +157,12 @@ public class ParserTest {
     	whileParses();
     	System.out.println(" "+i++);
     	returnParse();
+    	System.out.println(" "+i++);
+    	increParses();
+    	System.out.println(" "+i++);
+      ForParses();
+    	System.out.println(" "+i++);
+    	ExtendsParses();
     	System.out.println(" "+i++);
     }
 } // ParserTest

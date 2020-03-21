@@ -53,3 +53,10 @@
 /WhileExp.class
 /BooleanExp.class
 /ReturnExp.class
+/SubExp.class
+/MultExp.class
+/DivExp.class
+/ExtendsToken.class
+/ExtendExp.class
+/ForExp.class
+/ClassExp.class

@@ -66,3 +66,7 @@ PeriodToken.class
 QuotationToken.class
 SemiColonToken.class
 ThisExp.class
+/LeftBracetToken.class
+/RightBracketToken.class
+/LeftBracketToken.class
+/Methoddef.class

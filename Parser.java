@@ -154,6 +154,11 @@ public class Parser {
 			final ParseResult<Exp> printing = parseExp(startPos + 2);
 			checkTokenIs(printing.nextPos, new RightParenToken());
 			return new ParseResult<Exp>(new PrintExp(printing.result), printing.nextPos + 1);
+		} else if (tokens[startPos] instanceof PublicToken || tokens[startPos] instanceof PrivateToken || tokens[startPos] instanceof ProtectedToken) {
+			final VariableToken type = (VariableToken) tokens[startPos + 1];
+			final VariableToken name = (VariableToken) tokens[startPos + 2];
+			final ParseResult<Exp> input = parseExp(startPos + 3);
+			return new ParseResult<Exp>(new Methoddef(tokens[startPos], type.name, name.name, input.result), input.nextPos);
 		}     
       else {
 			return parseAdditiveExp(startPos);

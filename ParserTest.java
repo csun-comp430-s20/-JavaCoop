@@ -152,6 +152,13 @@ public class ParserTest {
                    new PeriodToken(),
                    new VariableToken("class1"));
   }
+    public static void methoddefParses() throws ParseException {
+      assertParses(new Methoddef(new PublicToken(), "int", "name", new IntegerExp(2)),
+                   new PublicToken(),
+                   new VariableToken("int"),
+                   new VariableToken("name"),
+                   new IntegerToken(2));
+  }
     public static void main(String[] args) throws ParseException {
     	//emptyDoesNotParse(); //causes crashing because null will not work so it works
     	int i = 0;
@@ -192,6 +199,8 @@ public class ParserTest {
     	printParses();
     	System.out.println(" "+i++);
     	ThisParses();
+    	System.out.println(" "+i++);
+    	methoddefParses();
     	System.out.println(" "+i++);
     }
 } // ParserTest

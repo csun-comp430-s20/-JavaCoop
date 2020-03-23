@@ -155,6 +155,10 @@ public class Parser {
 			checkTokenIs(printing.nextPos, new RightParenToken());
 			return new ParseResult<Exp>(new PrintExp(printing.result), printing.nextPos + 1);
 		} else if (tokens[startPos] instanceof PublicToken || tokens[startPos] instanceof PrivateToken || tokens[startPos] instanceof ProtectedToken) {
+			if(tokens.length < 4) {
+				checkTokenIs(startPos + 1, new SemiColonToken());
+				return parseAdditiveExp(startPos);
+			}
 			final VariableToken type = (VariableToken) tokens[startPos + 1];
 			final VariableToken name = (VariableToken) tokens[startPos + 2];
 			final ParseResult<Exp> input = parseExp(startPos + 3);

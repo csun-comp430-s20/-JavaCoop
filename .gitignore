@@ -70,3 +70,6 @@ ThisExp.class
 /RightBracketToken.class
 /LeftBracketToken.class
 /Methoddef.class
+NewExp.class
+NewToken.class
+Statement.class

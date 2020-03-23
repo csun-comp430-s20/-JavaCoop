@@ -139,7 +139,13 @@ public class ParserTest {
                    new AdditionToken(),
                    new IntegerToken(3));
   }
-
+    public static void printParses() throws ParseException {
+      assertParses(new PrintExp(new IntegerExp(2)),
+                   new PrintToken(),
+                   new LeftParenToken(),
+                   new IntegerToken(2),
+                   new RightParenToken());
+  }
     public static void main(String[] args) throws ParseException {
     	//emptyDoesNotParse(); //causes crashing because null will not work so it works
     	int i = 0;
@@ -176,6 +182,8 @@ public class ParserTest {
     	BreakParse();
     	System.out.println(" "+i++);
     	ClassParses();
+    	System.out.println(" "+i++);
+    	printParses();
     	System.out.println(" "+i++);
     }
 } // ParserTest

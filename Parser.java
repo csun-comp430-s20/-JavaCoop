@@ -96,11 +96,7 @@ public class Parser {
 		} else if (tokens[startPos] instanceof IncrementToken) {
 			final IntegerToken asInt = (IntegerToken) tokens[startPos + 1];
 			return new ParseResult<Exp>(new IntegerExp(asInt.value + 1), startPos + 2);
-		}/*
-      else if (tokens[startPos] instanceof PrintToken) {
-			final PrintToken asVar = (PrintToken) tokens[startPos];
-			return new ParseResult<Exp>(new PrintExp(asInt.value), startPos + 1);
-		}  */
+		}
       else if (tokens[startPos] instanceof ClassToken) {
 			final VariableToken asVar = (VariableToken) tokens[startPos + 1];
 			return new ParseResult<Exp>(new ClassExp(asVar.name), startPos + 2);
@@ -148,6 +144,11 @@ public class Parser {
 				return parseAdditiveExp(startPos);
 		} else if (tokens[startPos] instanceof BreakToken) {
 			return new ParseResult<Exp>(new BreakExp(), startPos + 1);
+		}else if (tokens[startPos] instanceof PrintToken) {
+			checkTokenIs(startPos + 1, new LeftParenToken());
+			final ParseResult<Exp> printing = parseExp(startPos + 2);
+			checkTokenIs(printing.nextPos, new RightParenToken());
+			return new ParseResult<Exp>(new PrintExp(printing.result), printing.nextPos + 1);
 		} else {
 			return parseAdditiveExp(startPos);
 		}

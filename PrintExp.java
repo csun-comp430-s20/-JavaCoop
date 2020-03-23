@@ -1,8 +1,8 @@
 public class PrintExp implements Exp {
 
-public final String name;
+public final Exp name;
 
-  public PrintExp(final String name) {
+  public PrintExp(final Exp name) {
       this.name = name;
   }
   @Override

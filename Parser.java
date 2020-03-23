@@ -91,11 +91,14 @@ public class Parser {
 			final IntegerToken asInt = (IntegerToken) tokens[startPos];
 			return new ParseResult<Exp>(new IntegerExp(asInt.value), startPos + 1);
 		} else if (tokens[startPos] instanceof BooleanToken) {
-			final BooleanToken asInt = (BooleanToken) tokens[startPos];
-			return new ParseResult<Exp>(new BooleanExp(asInt.value), startPos + 1);
+			final BooleanToken asBol = (BooleanToken) tokens[startPos];
+			return new ParseResult<Exp>(new BooleanExp(asBol.value), startPos + 1);
 		} else if (tokens[startPos] instanceof IncrementToken) {
 			final IntegerToken asInt = (IntegerToken) tokens[startPos + 1];
 			return new ParseResult<Exp>(new IntegerExp(asInt.value + 1), startPos + 2);
+		} else if (tokens[startPos] instanceof ClassToken) {
+			final VariableToken asVar = (VariableToken) tokens[startPos + 1];
+			return new ParseResult<Exp>(new ClassExp(asVar.name), startPos + 2);
 		} else {
 			checkTokenIs(startPos, new LeftParenToken());
 			final ParseResult<Exp> inner = parseExp(startPos + 1);
@@ -120,7 +123,8 @@ public class Parser {
 			final ParseResult<Exp> ifTrue = parseExp(guard.nextPos + 1);
 			return new ParseResult<Exp>(new WhileExp(guard.result, ifTrue.result), ifTrue.nextPos);
 		} else if (tokens[startPos] instanceof ReturnToken) {
-			return parseAdditiveExp(startPos + 1);
+			final ParseResult<Exp> ifTrue = parseExp(startPos + 1);
+			return new ParseResult<Exp>(new ReturnExp(ifTrue.result), ifTrue.nextPos);
 		} else if (tokens[startPos] instanceof ForToken) {
 			checkTokenIs(startPos + 1, new LeftParenToken());
 			final ParseResult<Exp> init = parseExp(startPos + 2);
@@ -130,13 +134,15 @@ public class Parser {
 			final ParseResult<Exp> exec = parseExp(inc.nextPos + 1);
 			return new ParseResult<Exp>(new ForExp(init.result, cond.result, inc.result, exec.result), exec.nextPos);
 		} else if (tokens[startPos] instanceof ClassToken) {
-				if(tokens[startPos + 2].equals(new ExtendsToken())) {
+				if(tokens.length > startPos + 4) {
 			checkTokenIs(startPos + 2, new ExtendsToken());
-			final ParseResult<Exp> nclass = parseExp(startPos+1);
-			final ParseResult<Exp> sclass = parseExp(startPos + 4);
-			return new ParseResult<Exp>(new ExtendExp(nclass.result, sclass.result), sclass.nextPos);
+			final VariableToken asVar = (VariableToken) tokens[startPos + 1];
+			final VariableToken asVar2 = (VariableToken) tokens[startPos + 4];
+			return new ParseResult<Exp>(new ExtendExp(new ClassExp(asVar.name),new ClassExp(asVar2.name)), startPos + 5);
 				}
 				return parseAdditiveExp(startPos);
+		} else if (tokens[startPos] instanceof BreakToken) {
+			return new ParseResult<Exp>(new BreakExp(), startPos + 1);
 		} else {
 			return parseAdditiveExp(startPos);
 		}

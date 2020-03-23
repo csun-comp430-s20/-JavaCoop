@@ -94,7 +94,7 @@ public class ParserTest {
                      new AdditionToken());
     }
     public static void returnParse() throws ParseException {
-      assertParses(new VariableExp("foo"),
+      assertParses(new ReturnExp(new VariableExp("foo")),
                    new ReturnToken(),
                    new VariableToken("foo"));
   }
@@ -108,14 +108,23 @@ public class ParserTest {
                    new AdditionToken(),
                    new IntegerToken(3));
   }
+    public static void BreakParse() throws ParseException {
+      assertParses(new BreakExp(),
+                   new BreakToken());
+  }
     
     public static void ExtendsParses() throws ParseException {
-      assertParses(new ExtendExp(new VariableExp("class1"), new VariableExp("class2")),
+      assertParses(new ExtendExp(new ClassExp("class1"), new ClassExp("class2")),
                    new ClassToken(),
                    new VariableToken("class1"),
                    new ExtendsToken(),
                    new ClassToken(),
                    new VariableToken("class2"));
+  }
+    public static void ClassParses() throws ParseException {
+      assertParses(new ClassExp("class1"),
+                   new ClassToken(),
+                   new VariableToken("class1"));
   }
     public static void ForParses() throws ParseException {
       assertParses(new ForExp(new IntegerExp(2), new BooleanExp(true), new IntegerExp(2), new PlusExp(new IntegerExp(2), new IntegerExp(3))),
@@ -163,6 +172,10 @@ public class ParserTest {
       ForParses();
     	System.out.println(" "+i++);
     	ExtendsParses();
+    	System.out.println(" "+i++);
+    	BreakParse();
+    	System.out.println(" "+i++);
+    	ClassParses();
     	System.out.println(" "+i++);
     }
 } // ParserTest

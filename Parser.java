@@ -100,6 +100,10 @@ public class Parser {
       else if (tokens[startPos] instanceof ClassToken) {
 			final VariableToken asVar = (VariableToken) tokens[startPos + 1];
 			return new ParseResult<Exp>(new ClassExp(asVar.name), startPos + 2);
+		} else if (tokens[startPos] instanceof ThisToken) {
+			checkTokenIs(startPos + 1, new PeriodToken());
+			final VariableToken asVar = (VariableToken) tokens[startPos + 2];
+			return new ParseResult<Exp>(new ThisExp(asVar.name), startPos + 3);
 		} else {
 			checkTokenIs(startPos, new LeftParenToken());
 			final ParseResult<Exp> inner = parseExp(startPos + 1);
@@ -150,13 +154,7 @@ public class Parser {
 			final ParseResult<Exp> printing = parseExp(startPos + 2);
 			checkTokenIs(printing.nextPos, new RightParenToken());
 			return new ParseResult<Exp>(new PrintExp(printing.result), printing.nextPos + 1);
-		}/*
-      else if (tokens[startPos] instanceof ThisToken) {
-      checkTokenIs(startPos + 1, new PeriodToken());
-      final ParseResult<Exp> currObj = parseExp(startPos + 1);
-      return new ParseResult<Exp>(new ThisExp(currObj.result), currObj.nextPos + 1);
-      }
-      */
+		}     
       else {
 			return parseAdditiveExp(startPos);
 		}

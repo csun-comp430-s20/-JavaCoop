@@ -143,13 +143,21 @@ public class Parser {
 				}
 				return parseAdditiveExp(startPos);
 		} else if (tokens[startPos] instanceof BreakToken) {
-			return new ParseResult<Exp>(new BreakExp(), startPos + 1);
+			//checkTokenIs(startPos + 1, new SemiColonToken());
+         return new ParseResult<Exp>(new BreakExp(), startPos + 1);
 		}else if (tokens[startPos] instanceof PrintToken) {
 			checkTokenIs(startPos + 1, new LeftParenToken());
 			final ParseResult<Exp> printing = parseExp(startPos + 2);
 			checkTokenIs(printing.nextPos, new RightParenToken());
 			return new ParseResult<Exp>(new PrintExp(printing.result), printing.nextPos + 1);
-		} else {
+		}/*
+      else if (tokens[startPos] instanceof ThisToken) {
+      checkTokenIs(startPos + 1, new PeriodToken());
+      final ParseResult<Exp> currObj = parseExp(startPos + 1);
+      return new ParseResult<Exp>(new ThisExp(currObj.result), currObj.nextPos + 1);
+      }
+      */
+      else {
 			return parseAdditiveExp(startPos);
 		}
 	}

@@ -62,3 +62,7 @@
 /ClassExp.class
 /BreakExp.class
 PrintExp.class
+PeriodToken.class
+QuotationToken.class
+SemiColonToken.class
+ThisExp.class

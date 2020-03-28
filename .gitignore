@@ -75,3 +75,4 @@ NewToken.class
 Statement.class
 AccessModifier.class
 ConstructorDec.class
+InstanceDec.class

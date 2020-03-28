@@ -110,7 +110,8 @@ public class ParserTest {
   }
     public static void BreakParse() throws ParseException {
       assertParses(new BreakExp(),
-                   new BreakToken());
+                   new BreakToken(),
+                   new SemiColonToken());
   }
     
     public static void ExtendsParses() throws ParseException {
@@ -144,8 +145,8 @@ public class ParserTest {
                    new PrintToken(),
                    new LeftParenToken(),
                    new IntegerToken(2),
-                   new RightParenToken());
-                  // new SemiColonToken());
+                   new RightParenToken(),
+                   new SemiColonToken());
                    
   }
     public static void ThisParses() throws ParseException {

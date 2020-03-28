@@ -73,3 +73,5 @@ ThisExp.class
 NewExp.class
 NewToken.class
 Statement.class
+AccessModifier.class
+ConstructorDec.class

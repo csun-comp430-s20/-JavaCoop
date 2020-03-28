@@ -145,6 +145,8 @@ public class ParserTest {
                    new LeftParenToken(),
                    new IntegerToken(2),
                    new RightParenToken());
+                  // new SemiColonToken());
+                   
   }
     public static void ThisParses() throws ParseException {
       assertParses(new ThisExp("class1"),

@@ -87,7 +87,7 @@ public class Parser {
 	public ParseResult<Exp> parsePrimary(final int startPos) throws ParseException {
 		if (tokens[startPos] instanceof VariableToken) {
 			final VariableToken asVar = (VariableToken) tokens[startPos];
-			return new ParseResult<Exp>(new VariableExp(asVar.name), startPos + 1);
+			return new ParseResult<Exp>(new VariableExp(new Variable(asVar.name)), startPos + 1);
 		} else if (tokens[startPos] instanceof IntegerToken) {
 			final IntegerToken asInt = (IntegerToken) tokens[startPos];
 			return new ParseResult<Exp>(new IntegerExp(asInt.value), startPos + 1);

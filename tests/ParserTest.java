@@ -23,7 +23,7 @@ public class ParserTest {
     }
 
     public static void variableParses() throws ParseException {
-        assertParses(new VariableExp("foo"), new VariableToken("foo"));
+        assertParses(new VariableExp(new Variable("foo")), new VariableToken("foo"));
     }
     
     public static void boolParses() throws ParseException {
@@ -31,7 +31,7 @@ public class ParserTest {
   }
 
     public static void parensParse() throws ParseException {
-        assertParses(new VariableExp("foo"),
+        assertParses(new VariableExp((new Variable("foo"))),
                      new LeftParenToken(),
                      new VariableToken("foo"),
                      new RightParenToken());
@@ -98,7 +98,7 @@ public class ParserTest {
                      new AdditionToken());
     }
     public static void returnParse() throws ParseException {
-      assertParses(new ReturnExp(new VariableExp("foo")),
+      assertParses(new ReturnExp(new VariableExp(new Variable("foo"))),
                    new ReturnToken(),
                    new VariableToken("foo"));
   }

@@ -25,9 +25,9 @@ public class VariableExp implements Exp {
 		return true;
 	}
 
-		public final String name;
+		public final Variable name;
 
-    public VariableExp(final String name) {
-        this.name = name;
+    public VariableExp(final Variable variable) {
+        this.name = variable;
     }
 }

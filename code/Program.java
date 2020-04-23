@@ -1,13 +1,26 @@
 package code;
-import java.lang.instrument.ClassDefinition;
 import java.util.List;
 
+//int main() {
+//...
+//}
+//
+//p ::= firstOrderFunction*
+
 public class Program {
-    final ClassDefinition[] classDefsarr;
-    final List<FirstOrderFunctionDefinition> classDefs;
-		public FirstOrderFunctionDefinition[] functions;
-    public Program(final List<FirstOrderFunctionDefinition> list) {
-        this.classDefs = list;
-        classDefsarr = null;
-    }
+ public final List<FirstOrderFunctionDefinition> functions;
+ 
+ public Program(final List<FirstOrderFunctionDefinition> functions) {
+     this.functions = functions;
+ }
 }
+
+
+//                gamma
+//initial           []
+//int x = 3;        [x -> int]
+//{
+//bool x = true;  [x -> bool]
+//}                 // ---nested gamma discarded---
+//int y = x;        [x -> int, y -> int]
+//

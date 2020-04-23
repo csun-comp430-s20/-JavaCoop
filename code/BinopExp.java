@@ -1,6 +1,6 @@
 package code;
 // e \in Exp ::= x | i | true | false | e1 op e2
-// op \in BOP ::= && | + | <
+// op \in BOP ::= && | + | < | - | * | /
 
 // binary operation
 public class BinopExp implements Exp {

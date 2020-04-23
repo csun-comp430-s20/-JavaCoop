@@ -17,7 +17,7 @@ public class TypecheckerTest {
                                                 final Type[] types) {
         assert(variables.length == types.length);
         final Map<Variable, Type> gamma = new HashMap<Variable, Type>();
-        System.out.println(variables.length == types.length);
+        
         for (int index = 0; index < variables.length; index++) {
             gamma.put(new Variable(variables[index]), types[index]);
         }
@@ -151,6 +151,30 @@ public class TypecheckerTest {
                                          new IntegerExp(1))));
     }
 
+    @Test
+    public void intSubIntGivesInt() throws IllTypedException {
+        assertEquals(new IntType(),
+                     typeof(makeEmptyGamma(),
+                            new BinopExp(new IntegerExp(0),
+                                         new SubBOP(),
+                                         new IntegerExp(1))));
+    }
+    @Test
+    public void intMultIntGivesInt() throws IllTypedException {
+        assertEquals(new IntType(),
+                     typeof(makeEmptyGamma(),
+                            new BinopExp(new IntegerExp(0),
+                                         new MultBOP(),
+                                         new IntegerExp(1))));
+    }
+    @Test
+    public void intDivIntGivesInt() throws IllTypedException {
+        assertEquals(new IntType(),
+                     typeof(makeEmptyGamma(),
+                            new BinopExp(new IntegerExp(0),
+                                         new DivBOP(),
+                                         new IntegerExp(1))));
+    }
     @Test(expected = IllTypedException.class)
     public void intPlusBoolGivesTypeError() throws IllTypedException {
         typeof(makeEmptyGamma(),
@@ -264,7 +288,7 @@ public class TypecheckerTest {
         final FunctionType ft = new FunctionType(new IntType(),
                                                  new BoolType());
         final Variable x = new Variable("x");
-
+        
         assertEquals(new BoolType(),
                      typeof(makeGamma(new String[]{ "x" }, new Type[]{ ft }),
                             new CallHigherOrderFunction(new VariableExp(x),

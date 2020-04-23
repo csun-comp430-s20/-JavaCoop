@@ -86,3 +86,6 @@
 /Variable.class
 /IllTypedException.class
 /Typechecker.class
+/SubBOP.class
+/MultBOP.class
+/DivBOP.class

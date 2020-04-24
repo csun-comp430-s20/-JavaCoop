@@ -175,6 +175,14 @@ public class TypecheckerTest {
                                          new DivBOP(),
                                          new IntegerExp(1))));
     }
+    @Test
+    public void varAddVarGivesVar() throws IllTypedException {
+        assertEquals(new VarType(),
+                     typeof(makeEmptyGamma(),
+                            new BinopExp(new VariableExp(new Variable("foo")),
+                                         new PlusBOP(),
+                                         new VariableExp(new Variable("foo")))));
+    }
     @Test(expected = IllTypedException.class)
     public void intPlusBoolGivesTypeError() throws IllTypedException {
         typeof(makeEmptyGamma(),

@@ -241,6 +241,7 @@ public class Typechecker {
                   throw new IllTypedException("left or right in && is not a boolean");
               }
           } else if (asBinop.op instanceof PlusBOP) {
+          	try{
               final Type leftType = typeof(gamma, asBinop.left);
               final Type rightType = typeof(gamma, asBinop.right);
 
@@ -249,6 +250,14 @@ public class Typechecker {
                   return new IntType();
               } else {
                   throw new IllTypedException("left or right in + is not an int");
+              }
+              } catch(Exception va) {
+              	if (asBinop.left instanceof VariableExp &&
+              			asBinop.right instanceof VariableExp) {
+                    return new VarType();
+                } else {
+                    throw new IllTypedException("left or right in + is not an int");
+                }
               }
           } else if (asBinop.op instanceof SubBOP) {
             final Type leftType = typeof(gamma, asBinop.left);

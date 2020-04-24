@@ -117,6 +117,15 @@ public class TypecheckerTest {
                                          new LessThanBOP(),
                                          new IntegerExp(1))));
     }
+    
+    @Test
+    public void intGreaterThanIntGivesBool() throws IllTypedException {
+        assertEquals(new BoolType(),
+                     typeof(makeEmptyGamma(),
+                            new BinopExp(new IntegerExp(0),
+                                         new GreaterThanBOP(),
+                                         new IntegerExp(1))));
+    }
 
     @Test(expected = IllTypedException.class)
     public void intLessThanBoolGivesTypeError() throws IllTypedException {
@@ -124,6 +133,14 @@ public class TypecheckerTest {
                new BinopExp(new IntegerExp(0),
                             new LessThanBOP(),
                             new BooleanExp(true)));
+    }
+    
+    @Test(expected = IllTypedException.class)
+    public void varLessThanVarGivesTypeError() throws IllTypedException {
+        typeof(makeEmptyGamma(),
+               new BinopExp(new VariableExp(new Variable("foo")),
+                            new LessThanBOP(),
+                            new VariableExp(new Variable("foo"))));
     }
 
     @Test(expected = IllTypedException.class)
@@ -216,6 +233,15 @@ public class TypecheckerTest {
                                          new BooleanExp(false))));
     }
 
+    @Test
+    public void boolOrBoolGivesBool() throws IllTypedException {
+        assertEquals(new BoolType(),
+                     typeof(makeEmptyGamma(),
+                            new BinopExp(new BooleanExp(true),
+                                         new OrBOP(),
+                                         new BooleanExp(false))));
+    } 
+    
     @Test(expected = IllTypedException.class)
     public void boolAndIntGivesTypeError() throws IllTypedException {
         typeof(makeEmptyGamma(),

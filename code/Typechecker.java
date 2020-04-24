@@ -230,7 +230,7 @@ public class Typechecker {
           return new BoolType();
       } else if (e instanceof BinopExp) { // &&, +, or <
           final BinopExp asBinop = (BinopExp)e;
-          if (asBinop.op instanceof AndBOP) {
+          if (asBinop.op instanceof AndBOP || asBinop.op instanceof OrBOP) {
               final Type leftType = typeof(gamma, asBinop.left);
               final Type rightType = typeof(gamma, asBinop.right);
 
@@ -289,7 +289,7 @@ public class Typechecker {
           } else {
               throw new IllTypedException("left or right in + is not an int");
           }
-      } else if (asBinop.op instanceof LessThanBOP) {
+      } else if (asBinop.op instanceof LessThanBOP || asBinop.op instanceof GreaterThanBOP) {
               final Type leftType = typeof(gamma, asBinop.left);
               final Type rightType = typeof(gamma, asBinop.right);
               

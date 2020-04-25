@@ -115,7 +115,7 @@ public class TypecheckerTest {
                      typeof(makeEmptyGamma(),
                             new BooleanExp(true)));
     }
-
+    
     @Test
     public void intLessThanIntGivesBool() throws IllTypedException {
         assertEquals(new BoolType(),
@@ -407,6 +407,13 @@ public class TypecheckerTest {
                      statementGamma(new ForStmt(new EmptyStmt(),
                                                 new BooleanExp(true),
                                                 new EmptyStmt(),
+                                                makeStatements(new BreakStmt()))));
+    }
+    
+    @Test
+    public void breakIsOkInWLoop() throws IllTypedException {
+        assertEquals(makeEmptyGamma(),
+                     statementGamma(new WhileStmt(new BooleanExp(true),
                                                 makeStatements(new BreakStmt()))));
     }
 

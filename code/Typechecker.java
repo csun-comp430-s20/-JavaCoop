@@ -212,7 +212,16 @@ public class Typechecker {
               throw new IllTypedException("Guard in for must be boolean");
           }
           return gamma;
-      } else if (s instanceof EmptyStmt) {
+      } else if (s instanceof WhileStmt) {
+        final WhileStmt asFor = (WhileStmt)s;
+        final Type guardType = typeof(gamma, asFor.guard);
+        if (guardType instanceof BoolType) {
+            typecheckStmts(gamma, true, asFor.body);
+        } else {
+            throw new IllTypedException("Guard in for must be boolean");
+        }
+        return gamma;
+    } else if (s instanceof EmptyStmt) {
           return gamma;
       } else {
           assert(false);

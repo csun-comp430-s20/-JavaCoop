@@ -1,5 +1,5 @@
 package code;
-// e \in Exp ::= x | i | true | false | e1 op e2
+// e \in Exp ::= x | i | true | false | e1 op e2 | var
 // op \in BOP ::= && | + | < | > | - | * | / | ||
 
 // binary operation

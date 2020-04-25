@@ -88,6 +88,13 @@ public class TypecheckerTest {
                      typeof(makeGamma(new String[]{ "x" }, new Type[]{ new BoolType() }),
                             new VariableExp(new Variable("x"))));
     }
+    
+    @Test
+    public void canAccessVarVariableInScope() throws IllTypedException {
+        assertEquals(new VarType(),
+                     typeof(makeGamma(new String[]{ "x" }, new Type[]{ new VarType() }),
+                            new VariableExp(new Variable("x"))));
+    }
 
     @Test(expected = IllTypedException.class)
     public void accessingOutOfScopeVariableIsIllTyped() throws IllTypedException {
@@ -160,6 +167,24 @@ public class TypecheckerTest {
     }
 
     @Test
+    public void intEqualToIntGivesBool() throws IllTypedException {
+        assertEquals(new BoolType(),
+                     typeof(makeEmptyGamma(),
+                            new BinopExp(new IntegerExp(1),
+                                         new EqualsToBOP(),
+                                         new IntegerExp(1))));
+    }
+    
+    @Test
+    public void varEqualToVarGivesBool() throws IllTypedException {
+        assertEquals(new BoolType(),
+                     typeof(makeEmptyGamma(),
+                            new BinopExp(new VariableExp(new Variable("foo")),
+                                         new EqualsToBOP(),
+                                         new VariableExp(new Variable("foo")))));
+    }
+
+    @Test
     public void intPlusIntGivesInt() throws IllTypedException {
         assertEquals(new IntType(),
                      typeof(makeEmptyGamma(),
@@ -223,7 +248,7 @@ public class TypecheckerTest {
                             new PlusBOP(),
                             new BooleanExp(false)));
     }
-
+    
     @Test
     public void boolAndBoolGivesBool() throws IllTypedException {
         assertEquals(new BoolType(),

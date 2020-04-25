@@ -289,7 +289,8 @@ public class Typechecker {
           } else {
               throw new IllTypedException("left or right in + is not an int");
           }
-      } else if (asBinop.op instanceof LessThanBOP || asBinop.op instanceof GreaterThanBOP) {
+      } else if (asBinop.op instanceof LessThanBOP || asBinop.op instanceof GreaterThanBOP || asBinop.op instanceof EqualsToBOP) {
+      	try {
               final Type leftType = typeof(gamma, asBinop.left);
               final Type rightType = typeof(gamma, asBinop.right);
               
@@ -297,8 +298,16 @@ public class Typechecker {
                   rightType instanceof IntType) {
                   return new BoolType();
               } else {
-                  throw new IllTypedException("left or right in < is not an int");
+                  throw new IllTypedException("left or right in line is not an int");
               }
+      	} catch(Exception e2) {
+      		if (asBinop.left instanceof VariableExp &&
+        			asBinop.right instanceof VariableExp && asBinop.op instanceof EqualsToBOP) {
+      			return new BoolType();
+      		} else {
+      			throw new IllTypedException("left or right in line is not a Variable");
+      		}
+      	}
           } else {
               assert(false);
               throw new IllTypedException("should be unreachable; unknown operator");

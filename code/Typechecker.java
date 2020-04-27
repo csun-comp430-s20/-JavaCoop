@@ -333,7 +333,24 @@ public class Typechecker {
           } else {
               throw new IllTypedException("Not in scope: " + asVar.name);
           }
-      } else if (e instanceof HigherOrderFunctionDef) {
+      } 
+      
+       /*
+      // print
+      else if (e instanceof PrintExp) {
+          // final Map<Variable, Type> gamma
+          final PrintExp asPrint = (PrintExp)e;
+          if (gamma.containsKey(asPrint.name)) {
+              final Type tau = gamma.get(asPrint.name);
+              return tau;
+          } else {
+              throw new IllTypedException("Not in scope: " + asPrint.name);
+          }
+      } 
+      */
+      
+      
+       else if (e instanceof HigherOrderFunctionDef) {
           // (x: Int) => x + 1
           // Int => Int
           final HigherOrderFunctionDef asFunc = (HigherOrderFunctionDef)e;

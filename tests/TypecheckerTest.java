@@ -95,6 +95,24 @@ public class TypecheckerTest {
                      typeof(makeGamma(new String[]{ "x" }, new Type[]{ new VarType() }),
                             new VariableExp(new Variable("x"))));
     }
+    
+    @Test
+    public void canPrintVariableInScope() throws IllTypedException {
+        assertEquals(new VarType(),
+                     typeof(makeEmptyGamma(), new PrintExp(new VariableExp(new Variable("x")))));
+    }
+    
+    @Test
+    public void canPrintIntInScope() throws IllTypedException {
+        assertEquals(new IntType(),
+                     typeof(makeEmptyGamma(), new PrintExp(new IntegerExp(1))));
+    }
+    
+    @Test
+    public void canPrintBoolInScope() throws IllTypedException {
+        assertEquals(new BoolType(),
+                     typeof(makeEmptyGamma(), new PrintExp(new BooleanExp(true))));
+    }
 
     @Test(expected = IllTypedException.class)
     public void accessingOutOfScopeVariableIsIllTyped() throws IllTypedException {

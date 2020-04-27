@@ -318,7 +318,11 @@ public class TypecheckerTest {
                             new AndBOP(),
                             new IntegerExp(0)));
     }
-    
+    /*@Test
+    public void instanceDec() throws IllTypedException {
+        assertEquals(new InstanceDec(new PublicToken(), new IntType(), new VariableExp(new Variable("foo")) ),
+                     new InstanceDec(new PublicToken(),typeof(makeEmptyGamma() new I new VariableExp(new Variable("foo"))));
+    }*/
     @Test
     public void canCreateHigherOrderFunction() throws IllTypedException {
         // (x: int) => true

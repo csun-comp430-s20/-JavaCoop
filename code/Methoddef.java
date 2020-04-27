@@ -1,10 +1,10 @@
 package code;
 public class Methoddef implements Exp{
 	public final Token access;
-	public final String type;
+	public final Type type;
 	public final String name;
 	public final Exp input;
-  public Methoddef(final Token access,final String type,final String name, final Exp input) {
+  public Methoddef(final Token access,final Type type,final String name, final Exp input) {
   	this.access = access;
   	this.type = type;
   	this.name = name;

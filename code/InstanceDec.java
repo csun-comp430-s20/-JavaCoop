@@ -1,10 +1,12 @@
 package code;
 public class InstanceDec implements Exp{
 	public final Token access;
+	public final Type type;
 	public final VariableExp name;
 
-  public InstanceDec(final Token access,final VariableExp name) {
+  public InstanceDec(final Token access,final Type type, final VariableExp name) {
   	this.access = access;
+  	this.type = type;
   	this.name = name;
   }
 

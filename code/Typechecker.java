@@ -302,8 +302,11 @@ public class Typechecker {
       	try {
               final Type leftType = typeof(gamma, asBinop.left);
               final Type rightType = typeof(gamma, asBinop.right);
-              
-              if (leftType instanceof IntType &&
+              if (leftType instanceof BoolType &&
+            			rightType instanceof BoolType && asBinop.op instanceof EqualsToBOP) {
+          			return new BoolType();
+          		}
+              else if (leftType instanceof IntType &&
                   rightType instanceof IntType) {
                   return new BoolType();
               } else {

@@ -183,6 +183,16 @@ public class TypecheckerTest {
                                          new EqualsToBOP(),
                                          new VariableExp(new Variable("foo")))));
     }
+    
+    @Test
+    public void boolEqualToBoolGivesBool() throws IllTypedException {
+        assertEquals(new BoolType(),
+                     typeof(makeEmptyGamma(),
+                            new BinopExp(new BooleanExp(true),
+                                         new EqualsToBOP(),
+                                         new BooleanExp(true))));
+    }
+
 
     @Test
     public void intPlusIntGivesInt() throws IllTypedException {

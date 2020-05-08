@@ -1,4 +1,5 @@
-package codegen_example.codegen;
+package tests;
+import code.*;
 
 public class TestResult {
     public final String[] output;

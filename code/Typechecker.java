@@ -32,7 +32,13 @@ public class Typechecker {
   // int a = x + x;     [x -> int, a -> int]               [x -> int]
 
   private final Map<FunctionName, FirstOrderFunctionDefinition> functionDefinitions;
+  
+  //Map for classes & constructors
+  //private final Map<ClassName,ClassExp> classes;
+  //private final Map<ConstructorName,ConstructorDec> constructors;
 
+  
+  
   // int bar(int x) {
   //   return x;
   // }
@@ -55,6 +61,9 @@ public class Typechecker {
               throw new IllTypedException("Duplicate function name: " + function.name);
           }
       }
+  
+  
+  
   } // Typechecker
 
   public void typecheckProgram(final Program program)
@@ -63,6 +72,33 @@ public class Typechecker {
           typecheckFunction(function);
       }
   } // typecheckProgram
+  
+  
+  /*
+  //typecheck classes
+  public void typecheckClass(final ClassExp c) throws IllTypedException {
+   classes = new HashMap<ClassName, ClassExp>();
+      for (final ClassExp c : program.c) {
+          if (!classes.containsKey(c.name)) {
+              classes.put(c.name, c);
+          } else {
+              throw new IllTypedException("Duplicate class name: " + c.name);
+          }
+      }
+  
+  
+  }
+*/
+
+/*
+//typecheck constructor
+public void typecheckConstructor(final ConstructorDec construct) throws IllTypedException {
+ 
+  
+}
+
+*/
+
 
   public void typecheckFunction(final FirstOrderFunctionDefinition function)
       throws IllTypedException {

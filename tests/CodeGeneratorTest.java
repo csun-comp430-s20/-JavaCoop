@@ -1,4 +1,5 @@
-package codegen_example.codegen;
+package tests;
+import code.*;
 
 import static org.junit.Assert.assertArrayEquals;
 import org.junit.Test;

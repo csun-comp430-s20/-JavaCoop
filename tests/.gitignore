@@ -2,3 +2,5 @@
 /TokenizerTest.class
 /TypecheckerTest.class
 /MultBOP.class
+/CodeGeneratorTest.class
+/TestResult.class

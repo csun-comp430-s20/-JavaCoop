@@ -160,7 +160,7 @@ public class ParserTest {
                    new VariableToken("class1"));
   }
     public static void methoddefParses() throws ParseException {
-      assertParses(new Methoddef(new PublicToken(), "int", "name", new IntegerExp(2)),
+      assertParses(new Methoddef(new PublicToken(), new IntType(), "name", new IntegerExp(2)),
                    new PublicToken(),
                    new VariableToken("int"),
                    new VariableToken("name"),

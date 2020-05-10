@@ -1,4 +1,4 @@
-package codegen_example.syntax;
+package code;
 
 public class VoidType implements Type {
     @Override

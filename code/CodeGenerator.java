@@ -1,21 +1,16 @@
-package codegen_example.codegen;
-
+package code;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
+import static jdk.internal.org.objectweb.asm.Opcodes.*;
+import jdk.internal.org.objectweb.asm.ClassWriter;
+import jdk.internal.org.objectweb.asm.Label;
+import jdk.internal.org.objectweb.asm.MethodVisitor;
 
-import org.objectweb.asm.Label;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.MethodVisitor;
-import static org.objectweb.asm.Opcodes.*;
-
-import codegen_example.syntax.*;
 
 // Assumptions:
 // -The input program is well-typed
@@ -58,8 +53,8 @@ public class CodeGenerator {
         variables = new HashMap<Variable, VariableEntry>();
         nextIndex = 0;
         
-        writer.visit(V1_7, // Java 1.7
-                     ACC_PUBLIC, // public
+        writer.visit(51, // Java 1.7
+                     1, // public
                      outputClassName, // class name
                      null, // signature (null means not generic)
                      "java/lang/Object", // superclass
@@ -67,11 +62,11 @@ public class CodeGenerator {
 
         // ---BEGIN CONSTRUCTOR DEFINITION---
         final MethodVisitor constructor =
-            writer.visitMethod(ACC_PUBLIC, // access modifier
-                               "<init>", // method name (constructor)
-                               "()V", // descriptor (no params, returns void)
-                               null, // signature (null means not generic)
-                               null); // exceptions
+            (MethodVisitor) writer.visitMethod(1, // access modifier
+				                   "<init>", // method name (constructor)
+				                   "()V", // descriptor (no params, returns void)
+				                   null, // signature (null means not generic)
+				                   null); // exceptions
         constructor.visitCode();
         constructor.visitVarInsn(ALOAD, 0); // load "this"
         constructor.visitMethodInsn(INVOKESPECIAL,
@@ -85,11 +80,11 @@ public class CodeGenerator {
 
         // ---BEGIN MAIN DEFINITION---
         final MethodVisitor main =
-            writer.visitMethod(ACC_PUBLIC | ACC_STATIC,
-                               "main",
-                               "([Ljava/lang/String;)V",
-                               null,
-                               null);
+             writer.visitMethod(1 | 8,
+				                   "main",
+				                   "([Ljava/lang/String;)V",
+				                   null,
+				                   null);
         main.visitCode();
         main.visitMethodInsn(INVOKESTATIC,
                              outputClassName,
@@ -100,7 +95,7 @@ public class CodeGenerator {
         main.visitMaxs(0, 0);
         // ---END MAIN DEFINITION---
 
-        methodVisitor = writer.visitMethod(ACC_PUBLIC | ACC_STATIC,
+        methodVisitor = writer.visitMethod(1 | 8,
                                            outputMethodName,
                                            "()V",
                                            null,
@@ -321,9 +316,9 @@ public class CodeGenerator {
     } // writeStatement
     
     public void writeProgram(final Program program) throws CodeGeneratorException, IOException {
-        for (final Stmt statement : program.statements) {
+        /*for (final Stmt statement : program.statements) {
             writeStatement(statement);
-        }
+        }*/
         methodVisitor.visitInsn(RETURN);
         methodVisitor.visitMaxs(0, 0);
         writer.visitEnd();

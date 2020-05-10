@@ -1,4 +1,4 @@
-package codegen_example.syntax;
+package code;
 
 public class PutStmt implements Stmt {
     public final Exp target;

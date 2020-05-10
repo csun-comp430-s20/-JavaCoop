@@ -54,7 +54,7 @@ public class Typechecker {
       // with overloading:
       // functionDefinitions = new HashMap<(FunctionName, ParameterTypes), FirstOrderFunctionDefinition>();
       functionDefinitions = new HashMap<FunctionName, FirstOrderFunctionDefinition>();
-      for (final FirstOrderFunctionDefinition function : program.functions) {
+      for (final FirstOrderFunctionDefinition function : program.classDefs) {
           if (!functionDefinitions.containsKey(function.name)) {
               functionDefinitions.put(function.name, function);
           } else {
@@ -207,8 +207,8 @@ public void typecheckConstructor(final ConstructorDec construct) throws IllTyped
           // int int
           // x = 1 + 2
           final AssignStmt asAssign = (AssignStmt)s;
-          if (gamma.containsKey(asAssign.x)) {
-              final Type variableType = gamma.get(asAssign.x);
+          if (gamma.containsKey(asAssign.variable)) {
+              final Type variableType = gamma.get(asAssign.variable);
               if (typeof(gamma, asAssign.e).equals(variableType)) {
                   return gamma;
               } else {

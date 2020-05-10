@@ -1,16 +1,7 @@
-package codegen_example.codegen;
+package code;
 
-import org.objectweb.asm.MethodVisitor;
-import static org.objectweb.asm.Opcodes.ILOAD;
-import static org.objectweb.asm.Opcodes.ISTORE;
-import static org.objectweb.asm.Opcodes.ALOAD;
-import static org.objectweb.asm.Opcodes.ASTORE;
-
-import codegen_example.syntax.Type;
-import codegen_example.syntax.BoolType;
-import codegen_example.syntax.IntType;
-import codegen_example.syntax.ReferenceType;
-import codegen_example.syntax.Variable;
+import static jdk.internal.org.objectweb.asm.Opcodes.*;
+import jdk.internal.org.objectweb.asm.MethodVisitor;
 
 public class VariableEntry {
     public final Variable variable;

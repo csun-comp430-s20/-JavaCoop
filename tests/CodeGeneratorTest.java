@@ -13,7 +13,6 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.ArrayList;
 
-import codegen_example.syntax.*;
 
 public class CodeGeneratorTest {
     // ---BEGIN CONSTANTS---

@@ -1,22 +1,20 @@
-package codegen_example.codegen;
+package code;
 
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.List;
-import java.util.ArrayList;
+import static jdk.internal.org.objectweb.asm.Opcodes.ACC_PUBLIC;
+import static jdk.internal.org.objectweb.asm.Opcodes.ACC_STATIC;
+import static jdk.internal.org.objectweb.asm.Opcodes.INVOKESPECIAL;
+import static jdk.internal.org.objectweb.asm.Opcodes.V1_7;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.MethodVisitor;
-import static org.objectweb.asm.Opcodes.*;
-
-import codegen_example.syntax.*;
+import jdk.internal.org.objectweb.asm.ClassWriter;
+import jdk.internal.org.objectweb.asm.MethodVisitor;
 
 // Assumptions:
 // -The input program is well-typed

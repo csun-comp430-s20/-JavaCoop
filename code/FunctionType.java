@@ -30,4 +30,9 @@ public class FunctionType implements Type {
     public String toString() {
         return "(" + paramType.toString() + " => " + returnType.toString() + ")";
     }
+
+		@Override
+		public String toDescriptorString() {
+			 return "(" + paramType.toString() + " => " + returnType.toString() + ")";
+		}
 } // FunctionType

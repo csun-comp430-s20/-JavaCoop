@@ -47,9 +47,9 @@ public class TypecheckerTest {
         return list;
     } // makeStatements
     
-    public static Program makeProgram(final FirstOrderFunctionDefinition... functions) {
-        final List<FirstOrderFunctionDefinition> list = new ArrayList<FirstOrderFunctionDefinition>();
-        for (final FirstOrderFunctionDefinition function : functions) {
+    public static Program makeProgram(final ClassDefinition... functions) {
+        final List<ClassDefinition> list = new ArrayList<ClassDefinition>();
+        for (final ClassDefinition function : functions) {
             list.add(function);
         }
         return new Program(list);

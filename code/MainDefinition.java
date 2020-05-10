@@ -1,4 +1,4 @@
-package codegen_example.syntax;
+package code;
 
 import java.util.List;
 import java.util.ArrayList;

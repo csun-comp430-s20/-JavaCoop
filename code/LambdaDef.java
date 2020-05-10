@@ -1,14 +1,13 @@
-package codegen_example.codegen;
+package code;
 
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.MethodVisitor;
-import static org.objectweb.asm.Opcodes.*;
+import jdk.internal.org.objectweb.asm.ClassWriter;
+import jdk.internal.org.objectweb.asm.MethodVisitor;
+import static jdk.internal.org.objectweb.asm.Opcodes.*;
 
-import codegen_example.syntax.*;
 
 public class LambdaDef {
     public final ClassName className;

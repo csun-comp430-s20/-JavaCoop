@@ -1,14 +1,10 @@
-package codegen_example.codegen;
+package code;
 
 import java.util.Map;
 import java.util.List;
-
-import org.objectweb.asm.Label;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.MethodVisitor;
-import static org.objectweb.asm.Opcodes.*;
-
-import codegen_example.syntax.*;
+import jdk.internal.org.objectweb.asm.Label;
+import jdk.internal.org.objectweb.asm.MethodVisitor;
+import static jdk.internal.org.objectweb.asm.Opcodes.*;
 
 public class ExpressionStatementGenerator {
     // ---BEGIN INSTANCE VARIABLES---

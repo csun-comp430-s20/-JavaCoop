@@ -1,4 +1,4 @@
-package codegen_example.syntax;
+package code;
 
 public class LambdaCallExp implements Exp {
     public final Exp lambda;

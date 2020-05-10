@@ -1,19 +1,26 @@
 package code;
-// e \in Exp ::= x | i | true | false | e1 op e2 | var
-// op \in BOP ::= && | + | < | > | - | * | / | ||
 
-// binary operation
 public class BinopExp implements Exp {
     public final Exp left;
-    public final BOP op;
+    public final BOP bop;
     public final Exp right;
 
     public BinopExp(final Exp left,
-                    final BOP op,
+                    final BOP bop,
                     final Exp right) {
         this.left = left;
-        this.op = op;
+        this.bop = bop;
         this.right = right;
     }
-}
 
+    @Override
+    public String toString() {
+        return ("(" +
+                left.toString() +
+                " " +
+                bop.toString() +
+                " " +
+                right.toString() +
+                ")");
+    }
+} // BinopExp

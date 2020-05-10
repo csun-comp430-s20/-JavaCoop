@@ -1,4 +1,4 @@
-package codegen_example.syntax;
+package code;
 
 public class PrintStmt implements Stmt {
     public final Variable variable;

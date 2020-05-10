@@ -1,7 +1,6 @@
-package codegen_example.codegen;
+package code;
 
 import java.util.Map;
-import java.util.HashMap;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
@@ -10,10 +9,9 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 
-import org.objectweb.asm.ClassWriter;
-import static org.objectweb.asm.Opcodes.*;
+import jdk.internal.org.objectweb.asm.ClassWriter;
+import static jdk.internal.org.objectweb.asm.Opcodes.*;
 
-import codegen_example.syntax.*;
 
 public class LambdaMaker {
     // ---BEGIN CONSTANTS---

@@ -1,11 +1,19 @@
 package code;
-public class AssignStmt implements Stmt {
-    public final Variable x;
-    public final Exp e;
 
-    public AssignStmt(final Variable x,
-                      final Exp e) {
-        this.x = x;
-        this.e = e;
+public class AssignStmt implements Stmt {
+    public final Variable variable;
+    public final Exp exp;
+    
+    public AssignStmt(final Variable variable,
+                      final Exp exp) {
+        this.variable = variable;
+        this.exp = exp;
     }
-}
+
+    @Override
+    public String toString() {
+        return (variable.toString() +
+                " = " +
+                exp.toString());
+    }
+} // AssignStmt

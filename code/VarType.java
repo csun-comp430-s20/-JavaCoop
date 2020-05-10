@@ -14,4 +14,9 @@ public class VarType implements Type {
     public String toString() {
         return "var";
     }
+
+		@Override
+		public String toDescriptorString() {
+			 return "var";
+		}
 }

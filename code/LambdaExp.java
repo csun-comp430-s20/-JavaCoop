@@ -1,4 +1,4 @@
-package codegen_example.syntax;
+package code;
 
 public class LambdaExp implements Exp {
     public final ReferenceType paramType;

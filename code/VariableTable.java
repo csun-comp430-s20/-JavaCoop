@@ -1,11 +1,4 @@
-package codegen_example.codegen;
-
-import codegen_example.syntax.Variable;
-import codegen_example.syntax.FormalParam;
-import codegen_example.syntax.Callable;
-import codegen_example.syntax.Type;
-import codegen_example.syntax.ReferenceType;
-
+package code;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;

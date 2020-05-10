@@ -164,7 +164,7 @@ public class Parser {
 			final VariableToken type = (VariableToken) tokens[startPos + 1];
 			final VariableToken name = (VariableToken) tokens[startPos + 2];
 			final ParseResult<Exp> input = parseExp(startPos + 3);
-			return new ParseResult<Exp>(new Methoddef(tokens[startPos], type.name, name.name, input.result), input.nextPos);
+			return new ParseResult<Exp>(new Methoddef(tokens[startPos], new IntType(), name.name, input.result), input.nextPos);
 		}     
       else {
 			return parseAdditiveExp(startPos);

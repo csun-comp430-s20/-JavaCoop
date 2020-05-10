@@ -53,8 +53,8 @@ public class CodeGenerator {
         variables = new HashMap<Variable, VariableEntry>();
         nextIndex = 0;
         
-        writer.visit(51, // Java 1.7
-                     1, // public
+        writer.visit(V1_7, // Java 1.7
+                     ACC_PUBLIC, // public
                      outputClassName, // class name
                      null, // signature (null means not generic)
                      "java/lang/Object", // superclass
@@ -80,7 +80,7 @@ public class CodeGenerator {
 
         // ---BEGIN MAIN DEFINITION---
         final MethodVisitor main =
-             writer.visitMethod(1 | 8,
+             writer.visitMethod(ACC_PUBLIC | ACC_STATIC,
 				                   "main",
 				                   "([Ljava/lang/String;)V",
 				                   null,
@@ -95,7 +95,7 @@ public class CodeGenerator {
         main.visitMaxs(0, 0);
         // ---END MAIN DEFINITION---
 
-        methodVisitor = writer.visitMethod(1 | 8,
+        methodVisitor = writer.visitMethod(ACC_PUBLIC | ACC_STATIC,
                                            outputMethodName,
                                            "()V",
                                            null,

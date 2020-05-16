@@ -54,7 +54,8 @@ public class Typechecker {
       // with overloading:
       // functionDefinitions = new HashMap<(FunctionName, ParameterTypes), FirstOrderFunctionDefinition>();
       functionDefinitions = new HashMap<FunctionName, FirstOrderFunctionDefinition>();
-      for (final FirstOrderFunctionDefinition function : program.classDefs) {
+    //  for (final FirstOrderFunctionDefinition function : program.classDefs) {
+    for (final FirstOrderFunctionDefinition function : program.functions) {
           if (!functionDefinitions.containsKey(function.name)) {
               functionDefinitions.put(function.name, function);
           } else {
@@ -209,7 +210,7 @@ public void typecheckConstructor(final ConstructorDec construct) throws IllTyped
           final AssignStmt asAssign = (AssignStmt)s;
           if (gamma.containsKey(asAssign.variable)) {
               final Type variableType = gamma.get(asAssign.variable);
-              if (typeof(gamma, asAssign.e).equals(variableType)) {
+              if (typeof(gamma, asAssign.exp).equals(variableType)) {
                   return gamma;
               } else {
                   throw new IllTypedException("Assigned something of wrong type");
@@ -275,7 +276,7 @@ public void typecheckConstructor(final ConstructorDec construct) throws IllTyped
           return new BoolType();
       } else if (e instanceof BinopExp) { // &&, +, or <
           final BinopExp asBinop = (BinopExp)e;
-          if (asBinop.op instanceof AndBOP || asBinop.op instanceof OrBOP) {
+          if (asBinop.bop instanceof AndBOP || asBinop.bop instanceof OrBOP) {
               final Type leftType = typeof(gamma, asBinop.left);
               final Type rightType = typeof(gamma, asBinop.right);
 
@@ -285,7 +286,7 @@ public void typecheckConstructor(final ConstructorDec construct) throws IllTyped
               } else {
                   throw new IllTypedException("left or right in && is not a boolean");
               }
-          } else if (asBinop.op instanceof PlusBOP) {
+          } else if (asBinop.bop instanceof PlusBOP) {
           	try{
               final Type leftType = typeof(gamma, asBinop.left);
               final Type rightType = typeof(gamma, asBinop.right);
@@ -304,7 +305,7 @@ public void typecheckConstructor(final ConstructorDec construct) throws IllTyped
                     throw new IllTypedException("left or right in + is not an int");
                 }
               }
-          } else if (asBinop.op instanceof SubBOP) {
+          } else if (asBinop.bop instanceof SubBOP) {
             final Type leftType = typeof(gamma, asBinop.left);
             final Type rightType = typeof(gamma, asBinop.right);
 
@@ -314,7 +315,7 @@ public void typecheckConstructor(final ConstructorDec construct) throws IllTyped
             } else {
                 throw new IllTypedException("left or right in + is not an int");
             }
-          } else if (asBinop.op instanceof MultBOP) {
+          } else if (asBinop.bop instanceof MultBOP) {
             final Type leftType = typeof(gamma, asBinop.left);
             final Type rightType = typeof(gamma, asBinop.right);
 
@@ -324,7 +325,7 @@ public void typecheckConstructor(final ConstructorDec construct) throws IllTyped
             } else {
                 throw new IllTypedException("left or right in + is not an int");
             }
-        } else if (asBinop.op instanceof DivBOP) {
+        } else if (asBinop.bop instanceof DivBOP) {
           final Type leftType = typeof(gamma, asBinop.left);
           final Type rightType = typeof(gamma, asBinop.right);
 
@@ -334,12 +335,12 @@ public void typecheckConstructor(final ConstructorDec construct) throws IllTyped
           } else {
               throw new IllTypedException("left or right in + is not an int");
           }
-      } else if (asBinop.op instanceof LessThanBOP || asBinop.op instanceof GreaterThanBOP || asBinop.op instanceof EqualsToBOP) {
+      } else if (asBinop.bop instanceof LessThanBOP || asBinop.bop instanceof GreaterThanBOP || asBinop.bop instanceof EqualsToBOP) {
       	try {
               final Type leftType = typeof(gamma, asBinop.left);
               final Type rightType = typeof(gamma, asBinop.right);
               if (leftType instanceof BoolType &&
-            			rightType instanceof BoolType && asBinop.op instanceof EqualsToBOP) {
+            			rightType instanceof BoolType && asBinop.bop instanceof EqualsToBOP) {
           			return new BoolType();
           		}
               else if (leftType instanceof IntType &&
@@ -350,7 +351,7 @@ public void typecheckConstructor(final ConstructorDec construct) throws IllTyped
               }
       	} catch(Exception e2) {
       		if (asBinop.left instanceof VariableExp &&
-        			asBinop.right instanceof VariableExp && asBinop.op instanceof EqualsToBOP) {
+        			asBinop.right instanceof VariableExp && asBinop.bop instanceof EqualsToBOP) {
       			return new BoolType();
       		} else {
       			throw new IllTypedException("left or right in line is not a Variable");
@@ -362,12 +363,12 @@ public void typecheckConstructor(final ConstructorDec construct) throws IllTyped
           }
       } else if (e instanceof VariableExp) {
           // final Map<Variable, Type> gamma
-          final VariableExp asVar = (VariableExp)e;
-          if (gamma.containsKey(asVar.name)) {
-              final Type tau = gamma.get(asVar.name);
+          final VariableExp asVar = (VariableExp)e; 
+          if (gamma.containsKey(asVar.variable)) {
+              final Type tau = gamma.get(asVar.variable);
               return tau;
           } else {
-              throw new IllTypedException("Not in scope: " + asVar.name);
+              throw new IllTypedException("Not in scope: " + asVar.variable);
           }
       } 
      

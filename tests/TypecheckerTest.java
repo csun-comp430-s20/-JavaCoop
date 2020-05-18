@@ -47,12 +47,12 @@ public class TypecheckerTest {
         return list;
     } // makeStatements
     
-    public static Program makeProgram(final ClassDefinition... functions) {
-        final List<ClassDefinition> list = new ArrayList<ClassDefinition>();
-        for (final ClassDefinition function : functions) {
+    public static Program makeProgram(final FirstOrderFunctionDefinition... fdef) {
+        final List<FirstOrderFunctionDefinition> list = new ArrayList<FirstOrderFunctionDefinition>();
+        for (final FirstOrderFunctionDefinition function : fdef) {
             list.add(function);
         }
-        return new Program(list);
+        return new Program(list, null);
     } // makeProgram
 
     public static List<Exp> makeActualParams(final Exp... exps) {
@@ -66,11 +66,11 @@ public class TypecheckerTest {
     public static Type typeof(final Map<Variable, Type> gamma,
                               final Exp e)
         throws IllTypedException {
-        return (new Typechecker(makeProgram())).typeof(gamma, e);
+        return (new Typechecker(makeProgram(null))).typeof(gamma, e);
     } // typeof
 
     public static Map<Variable, Type> statementGamma(final Stmt... stmts) throws IllTypedException {
-        return new Typechecker(makeProgram()).typecheckStmts(makeEmptyGamma(),
+        return new Typechecker(makeProgram(null)).typecheckStmts(makeEmptyGamma(),
                                                              false,
                                                              makeStatements(stmts));
     } // statementGamma
@@ -586,7 +586,7 @@ public class TypecheckerTest {
                                              makeFormalParams(new Type[0], new String[0]),
                                              makeStatements(),
                                              new IntegerExp(1));
-        final Program p = makeProgram(fdef, fdef);
+        final Program p = makeProgram(fdef);
         new Typechecker(p);
     }
     
@@ -675,7 +675,7 @@ public class TypecheckerTest {
     public void cannotCallNonexistantFirstOrderFunction() throws IllTypedException {
         // foo(true);
         final FunctionName fn = new FunctionName("foo");
-        final Program p = makeProgram();
+        final Program p = makeProgram(null);
         new Typechecker(p).typeof(makeEmptyGamma(),
                                   new CallFirstOrderFunction(fn,
                                                              makeActualParams(new BooleanExp(true))));

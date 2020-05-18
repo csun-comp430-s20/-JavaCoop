@@ -675,7 +675,7 @@ public class TypecheckerTest {
     public void cannotCallNonexistantFirstOrderFunction() throws IllTypedException {
         // foo(true);
         final FunctionName fn = new FunctionName("foo");
-        final Program p = makeProgram(null);
+        final Program p = makeProgram();
         new Typechecker(p).typeof(makeEmptyGamma(),
                                   new CallFirstOrderFunction(fn,
                                                              makeActualParams(new BooleanExp(true))));

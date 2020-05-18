@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.ArrayList;
 
-
+//Sorry professor we couldn't figure out how to translate this all into normal java
 public class CodeGeneratorTest {
     // ---BEGIN CONSTANTS---
     public static final String WORK_DIRECTORY = "test_workspace";
@@ -327,8 +327,6 @@ public class CodeGeneratorTest {
                            "false");
     } // testLessThanFalse
 
-    // key point: this test does NOT improve coverage, but it did catch a bug -
-    // I was using the wrong bytecode instruction, but the issue was only apparent
     @Test
     public void testLessThanTrue() throws CodeGeneratorException, IOException {
         // bool b = 5 < 10;

@@ -170,7 +170,9 @@ public class CodeGenerator {
             methodVisitor.visitJumpInsn(IF_ICMPLT, conditionTrue);
         } else if (bop instanceof EqualsBOP) {
             methodVisitor.visitJumpInsn(IF_ICMPEQ, conditionTrue);
-        } else {
+        } else if (bop instanceof GreaterThanBOP) {
+          methodVisitor.visitJumpInsn(IF_ICMPEQ, conditionTrue);
+      } else {
             assert(false);
             throw new CodeGeneratorException("Unrecognized operation: " + bop);
         }

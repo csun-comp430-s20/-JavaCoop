@@ -345,6 +345,38 @@ public class CodeGeneratorTest {
                            body,
                            "true");
     } // testLessThanTrue
+    
+    public void testGreaterThanFalse() throws CodeGeneratorException, IOException {
+      // bool b = 10 < 5;
+      // print(b);
+      final Exp lt = new BinopExp(new IntegerLiteralExp(5),
+                                  new GreaterThanBOP(),
+                                  new IntegerLiteralExp(10));
+      final List<Stmt> body =
+          stmts(new VariableDeclarationStmt(new BoolType(),
+                                            new Variable("b"),
+                                            lt),
+                new PrintStmt(new Variable("b")));
+      assertOutputInMain("TestLessThanFalse",
+                         body,
+                         "false");
+  } // testLessThanFalse
+    
+    public void testGreaterThanTrue() throws CodeGeneratorException, IOException {
+      // bool b = 10 < 5;
+      // print(b);
+      final Exp lt = new BinopExp(new IntegerLiteralExp(10),
+                                  new GreaterThanBOP(),
+                                  new IntegerLiteralExp(5));
+      final List<Stmt> body =
+          stmts(new VariableDeclarationStmt(new BoolType(),
+                                            new Variable("b"),
+                                            lt),
+                new PrintStmt(new Variable("b")));
+      assertOutputInMain("TestLessThanFalse",
+                         body,
+                         "false");
+  } // testLessThanFalse
 
     @Test
     public void testEqualsFalse() throws CodeGeneratorException, IOException {
@@ -1224,69 +1256,4 @@ public class CodeGeneratorTest {
                      "3");
     } // testMultipleClasses
 
-    @Test
-    public void testClosureCall() throws CodeGeneratorException, IOException {
-        // class Integer extends Object {
-        //   int value;
-        //   init(int value) {
-        //     super();
-        //     this[Integer].value = value;
-        //   }
-        //   main {
-        //     Integer i = new Integer(5);
-        //     (Integer => Integer) f = (Integer x) => new Integer(x[Integer].value + i[Integer].value);
-        //     int value = f[Integer](new Integer(1))[Integer].value;
-        //     print(value);
-        //   }
-        // }
-        final ClassName integer = new ClassName("Integer");
-        final List<FormalParam> instanceVariables = new ArrayList<FormalParam>();
-        instanceVariables.add(new FormalParam(new IntType(), new Variable("value")));
-
-        final Exp lambdaBody =
-            new NewExp(integer,
-                       actualParams(new BinopExp(new GetExp(new VariableExp(new Variable("x")),
-                                                            integer,
-                                                            new Variable("value")),
-                                                 new PlusBOP(),
-                                                 new GetExp(new VariableExp(new Variable("i")),
-                                                            integer,
-                                                            new Variable("value")))));
-        final List<Stmt> main =
-            stmts(new VariableDeclarationStmt(new ReferenceType(integer),
-                                              new Variable("i"),
-                                              new NewExp(integer,
-                                                         actualParams(new IntegerLiteralExp(5)))),
-                  new VariableDeclarationStmt(new LambdaType(new ReferenceType(integer),
-                                                             new ReferenceType(integer)),
-                                              new Variable("f"),
-                                              new LambdaExp(new ReferenceType(integer),
-                                                            new Variable("x"),
-                                                            new ReferenceType(integer),
-                                                            lambdaBody)),
-                  new VariableDeclarationStmt(new IntType(),
-                                              new Variable("value"),
-                                              new GetExp(new LambdaCallExp(new VariableExp(new Variable("f")),
-                                                                           new ReferenceType(integer),
-                                                                           new NewExp(integer, actualParams(new IntegerLiteralExp(1)))),
-                                                         integer,
-                                                         new Variable("value"))),
-                  new PrintStmt(new Variable("value")));
-        
-        final ClassDefinition intDef =
-            new ClassDefinition(integer,
-                                new ClassName(ClassGenerator.objectName),
-                                instanceVariables,
-                                new Constructor(instanceVariables,
-                                                actualParams(),
-                                                stmts(new PutStmt(new VariableExp(new Variable("this")),
-                                                                  integer,
-                                                                  new Variable("value"),
-                                                                  new VariableExp(new Variable("value"))))),
-                                new MainDefinition(main),
-                                methods());
-        assertOutput(makeProgram(intDef),
-                     "6");
-    } // testClosureCall
-    
 } // CodeGeneratorTest

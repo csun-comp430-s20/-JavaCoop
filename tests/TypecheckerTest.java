@@ -66,11 +66,11 @@ public class TypecheckerTest {
     public static Type typeof(final Map<Variable, Type> gamma,
                               final Exp e)
         throws IllTypedException {
-        return (new Typechecker(makeProgram(null))).typeof(gamma, e);
+        return (new Typechecker(makeProgram())).typeof(gamma, e);
     } // typeof
 
     public static Map<Variable, Type> statementGamma(final Stmt... stmts) throws IllTypedException {
-        return new Typechecker(makeProgram(null)).typecheckStmts(makeEmptyGamma(),
+        return new Typechecker(makeProgram()).typecheckStmts(makeEmptyGamma(),
                                                              false,
                                                              makeStatements(stmts));
     } // statementGamma
